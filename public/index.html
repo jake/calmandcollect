@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Calm + Collect</title>
     <style type="text/css">
         body {
@@ -10,6 +11,13 @@
             bottom: 0;
             left: 0;
             font: bold 22px "courier new";
+
+            background: hsl(10, 10%, 90%);
+            color: rgba(255,255,255, 0.5);
+
+            -webkit-transition: background-color 50ms linear;
+            -moz-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
         }
 
         div {
@@ -26,8 +34,71 @@
             vertical-align: middle;
         }
     </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript">
+        $(function(){
+            Fader = {
+                h: 10,
+                s: 10,
+                l: 100,
 
+                incr: {
+                    h: 1,
+                    s: -1,
+                    l: 1,
+                },
+
+                init: function()
+                {
+                    window.setInterval(function(){
+                        if (Fader.h >= 360) {
+                            Fader.incr.h = -1;
+                        } else if (Fader.h <= 0) {
+                            Fader.incr.h = 1;
+                        }
+
+                        Fader.h += Fader.incr.h;
+
+                        Fader.set_color();
+                    }, 50);
+
+                    window.setInterval(function(){
+                        if (Fader.s >= 80) {
+                            Fader.incr.s = -1;
+                        } else if (Fader.s <= 0) {
+                            Fader.incr.s = 1;
+                        }
+
+                        Fader.s += Fader.incr.s;
+
+                        Fader.set_color();
+                    }, 100);
+
+                    window.setInterval(function(){
+                        if (Fader.l >= 90) {
+                            Fader.incr.l = -1;
+                        } else if (Fader.l <= 10) {
+                            Fader.incr.l = 1;
+                        }
+
+                        Fader.l += Fader.incr.l;
+
+                        Fader.set_color();
+                    }, 100);
+                },
+
+                set_color: function()
+                {
+                    var hsl = 'hsl(' + Fader.h + ', ' + Fader.s + '%, ' + Fader.l + '%)';
+
+                    console.log(hsl);
+
+                    $('body').css('background-color', hsl);
+                },
+            };
+
+            Fader.init();
+        });
     </script>
 </head>
 <body>
