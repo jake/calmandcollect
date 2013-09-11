@@ -11,10 +11,10 @@ app.configure('development', function(){
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 
-app.get('/*', function(req, res){
-    res.redirect('/');
-    res.end();
-});
+// app.get('/*', function(req, res){
+//     res.redirect('/');
+//     res.end();
+// });
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
